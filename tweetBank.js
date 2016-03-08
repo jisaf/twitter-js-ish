@@ -1,12 +1,11 @@
 const _ = require ('lodash')
+const moment = require('moment')
 
 var data = []
-var count = 1
 function add (name, text) {
   var created = new Date();
-  count++
-  data.push({ name: name, text: text, id: count, created: created });
-  return [count, created.toLocaleTimeString()];
+  data.push({ name: name, text: text, id: data.length, created: created });
+  return _.clone(data[data.length-1])
 }
 
 

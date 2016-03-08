@@ -1,6 +1,7 @@
 module.exports = function(io){
 	var express = require('express'); // do we need this if this is a function going through app.js, which already has express
 	var router = express.Router();
+	var moment = require('moment')
 	// could use one line instead: var router = require('express').Router();
 	var tweetBank = require('../tweetBank');
 
@@ -25,8 +26,9 @@ module.exports = function(io){
 		var name = req.body.name;
 		var text = req.body.text;
 		var tweet = tweetBank.add(name, text);
+		tweet.created = moment(tweet.created).fromNow()
 		// var tweet = tweetBank.find({name: name})
-		io.sockets.emit('new_tweet', {name: name, text: text, id: tweet[0], created: tweet[1] })
+		io.sockets.emit('new_tweet', tweet)
 		// next()
 		res.redirect('/');
 	});
