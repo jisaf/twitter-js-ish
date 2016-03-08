@@ -78,5 +78,31 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+    <script>
+      // Load the socket.io library above, then connect to the server.
+      // Because the socket.io server is being run on the same server as your 
+      // Express instance, you can connect() without any arguments.
+      var socket = io.connect();
+      socket.on('connect', function(){
+        console.log('connected to server via WebSockets!');
+      });
+      // When 'new_tweet' events are fired, do something with the packaged tweet
+      socket.on('new_tweet', function (tweet) { 
+        console.log(tweet);
+        // var newtweet = document.createElement("LI");
+        var node ='<img class="tweetbox" src="http://lorempixel.com/48/48"><li class="content by"><a href="http://localhost:3000/users/'+tweet.name + '">' +tweet.name + '</a></li><li class="tweetbox">'+tweet.text + '</li><li><a href="http://localhost:3000/tweets/'+tweet.id + '">New Tweet</a></li>'
+        $("#tweetlist").append(node)
+
+        // var tweetText = document.createTextNode(node);
+        // newtweet.appendChild(tweetText)
+        // var tweetlist = document.getElementById("tweetlist");
+        // tweetlist.appendChild(newtweet)
+        // tweetlist.appendChild(tweet)
+        // alert('Refreshing... check the console...');
+        // some logic to add the new tweet to the DOM…
+      }); 
+    </script>
   </body>
 </html>

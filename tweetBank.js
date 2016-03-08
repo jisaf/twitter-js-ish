@@ -3,8 +3,12 @@ const _ = require ('lodash')
 var data = []
 var count = 1
 function add (name, text) {
-  data.push({ name: name, text: text, id: count++, created: new Date() });
+  var created = new Date();
+  count++
+  data.push({ name: name, text: text, id: count, created: created });
+  return [count, created.toLocaleTimeString()];
 }
+
 
 function list () {
   return _.cloneDeep(data);
