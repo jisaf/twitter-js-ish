@@ -8,15 +8,18 @@ const routes = require('./routes')
 
 //do extra credit on 3. logging middleware
 //do extra credit on 7. static routing
+//make prettier
+
 app.use(morgan('dev'));
 
+app.use(express.static('public'))
 app.engine('html', swig.renderFile);
 app.set('view engine','html');
 app.set('views',__dirname+'/views');
 swig.setDefaults({cache: false});
 
 app.use('/', routes)
-app.use(express.static('public'))
+
 
 
 
