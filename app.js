@@ -1,6 +1,6 @@
 const express = require ('express');
 const app = express();
-const morgan = require('morgan')
+const morgan = require('morgan');
 const chalk = require('chalk');
 const swig = require('swig');
 
@@ -26,21 +26,20 @@ const swig = require('swig');
 // app.use(logger)
 // app.use('/special', specialLogger)
 // app.use(morgan)
-app.use(morgan('combined'));
+app.use(morgan('dev'));
+
+app.engine('html', swig.renderFile);
+app.set('view engine','html');
+app.set('views',__dirname+'/views');
+swig.setDefaults({cache: false});
 
 app.get('/', function(req, res){
-	// res.send("Ohai!")
-	//success()
-	swig.renderFile('./views/index.html',{title: "An Example", people: [{name: 'Gandalf'},{name: 'Frodo'},{name: 'Hermione'}]}, function (err, out){
-		if (err) throw err
-		res.send(out)
-	})
-})
-app.get('/news', function(req, res){
-	res.send(new Date())
-	//success()
-})
- 
-console.log("server listening")
-app.listen(3000)
+	res.send("Ohai!");
+});
 
+app.get('/news', function(req, res){
+	res.send(new Date());
+});
+ 
+console.log("server listening");
+app.listen(3000);
