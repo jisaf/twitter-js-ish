@@ -1,7 +1,8 @@
-var express = require ('express');
-var app = express();
+const express = require ('express');
+const app = express();
 const morgan = require('morgan')
-var chalk = require('chalk');
+const chalk = require('chalk');
+const swig = require('swig');
 
 //extra credit on 3. logging middleware
 // function getStatus(func){
@@ -28,8 +29,12 @@ var chalk = require('chalk');
 app.use(morgan('combined'));
 
 app.get('/', function(req, res){
-	res.send("Ohai!")
+	// res.send("Ohai!")
 	//success()
+	swig.renderFile('./views/index.html',{title: "An Example", people: [{name: 'Gandalf'},{name: 'Frodo'},{name: 'Hermione'}]}, function (err, out){
+		if (err) throw err
+		res.send(out)
+	})
 })
 app.get('/news', function(req, res){
 	res.send(new Date())
