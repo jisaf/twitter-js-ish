@@ -34,7 +34,8 @@ app.set('views',__dirname+'/views');
 swig.setDefaults({cache: false});
 
 app.get('/', function(req, res){
-	res.send("Ohai!");
+	var people = [{name: 'Full'},{name: 'Stacker'},{name: 'Boy'}];
+	res.render('index', {title: 'Hall of Fame', people: people})
 });
 
 app.get('/news', function(req, res){
