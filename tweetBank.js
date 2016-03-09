@@ -1,11 +1,11 @@
-const _ = require ('lodash')
-const moment = require('moment')
+const _ = require ('lodash');
+const moment = require('moment');
 
-var data = []
+var data = [];
 function add (name, text) {
   var created = new Date();
   data.push({ name: name, text: text, id: data.length, created: created });
-  return _.clone(data[data.length-1])
+  return _.clone(data[data.length-1]);
 }
 
 
@@ -21,7 +21,7 @@ module.exports = {
 	add: add,
 	list: list,
 	find: find
-}
+};
 
 var randArrayEl = function(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -41,5 +41,5 @@ var getFakeTweet = function() {
 for (var i = 0; i < 10; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
-console.log(data)
+// console.log(data)
 
