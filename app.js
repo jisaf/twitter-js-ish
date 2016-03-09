@@ -13,18 +13,15 @@ const socketio = require('socket.io');
 //make prettier
 
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname+'/public'));
 app.engine('html', swig.renderFile);
 app.set('view engine','html');
 app.set('views',__dirname+'/views');
-swig.setDefaults({cache: false});
+swig.setDefaults({cache: false});d
 
 const server = app.listen(3000);
 const io = socketio.listen(server);
 
 app.use('/', routes(io));
-
-
-

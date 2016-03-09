@@ -13,13 +13,13 @@ module.exports = function(io){
 	router.get('/users/:name', function(req, res){
 		var name = req.params.name;
 		var list = tweetBank.find({name: name});
-		res.render( 'index', {title: 'Twitter.js - Posts by' + name, tweets: list, showForm: true, formfield: name})
+		res.render( 'index', {title: 'Twitter.js - Posts by' + name, tweets: list, showForm: true, formfield: name});
 	});
 
 	router.get('/tweets/:id', function(req, res){
 		var id = req.params.id;
 		var list = tweetBank.find({id: +id});
-		res.render( 'index', {title: 'Twitter.js - Post id ' + id, tweets: list, showForm: true})
+		res.render( 'index', {title: 'Twitter.js - Post id ' + id, tweets: list, showForm: true});
 	});
 
 	router.post('/tweets', function(req, res,next){
@@ -35,4 +35,4 @@ module.exports = function(io){
 
 
 	return router;
-}
+};
